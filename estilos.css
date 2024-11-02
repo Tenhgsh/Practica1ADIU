@@ -1,0 +1,22 @@
+#column{
+    
+    flex-flow: row wrap ;
+    border-style: solid;
+}
+
+header{
+    position:fixed;
+    width:100%;
+}
+#encabezado{
+    
+    
+}
+#container{
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+
+  
+}
+
