@@ -5,16 +5,12 @@ def insert_csv_to_mysql(file_path, table_name):
     df = df.replace("'", r"\\'", regex=True)
     df['Release'] = pd.to_datetime(df['Release'], format='%d/%m/%Y', errors='coerce')
     df['Release'] = pd.to_datetime(df['Release'], errors='coerce').dt.strftime('%Y-%m-%d')
-    print(df)
     da=pd.DataFrame(df['Artist1'])
     da = da.drop_duplicates(subset=['Artist1'], keep='first')
     dal=pd.DataFrame(df)
-    print(len(dal))
     dal = dal.drop_duplicates(subset=['Album'], keep='first')
-    print(dal)
     dc=pd.DataFrame(df)
     dc=dc.dropna(subset=['Artist2'])
-    print(len(dc))
 
 
     # Conectarse a MySQL
@@ -43,7 +39,6 @@ def insert_csv_to_mysql(file_path, table_name):
     for _, row in dal.iterrows():
         album_insert+=f"('{str(row[3])}','{str(row[13])}',(SELECT id FROM ARTISTA WHERE nombre='{str(row[2])}')),"
     album_insert+=";"
-    print(sql_insert)
     for _, row in dc.iterrows():
         colab_insert+=f"((SELECT id FROM ARTISTA WHERE nombre='{str(row[14])}'),(SELECT id FROM CANCION WHERE nombre='{str(row[1])}')),"
     colab_insert+=";"
