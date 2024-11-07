@@ -2,6 +2,7 @@
     
     flex-flow: row wrap ;
     border-style: solid;
+    border-color:red;
 }
 
 header{
